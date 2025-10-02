@@ -24,3 +24,7 @@ App will be running at http://localhost:5173
 4. Build for production
 npm run build
 npm run preview
+
+![Homepage Screenshot](src/assets/homepage.png)
+![itempage Screenshot](src/assets/itempage.png)
+![sectionpage Screenshot](src/assets/sectionpage.png)
