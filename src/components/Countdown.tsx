@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { AuctionStatus } from "../types/item"; 
+import type { AuctionStatus } from "../types/item";
 
 interface CountdownProps {
   endDate?: string;
@@ -14,7 +14,7 @@ type TL = {
   seconds: number;
   ended: boolean;
 };
-
+//показва оставащо време до старт или край на търга.
 function normalizeStatus(s?: string) {
   return (s || "").toString().trim().toLowerCase();
 }
@@ -36,7 +36,7 @@ export default function Countdown({ endDate, status, startDate }: CountdownProps
   const startTs = startDate ? new Date(startDate).getTime() : NaN;
   const endTs = endDate ? new Date(endDate).getTime() : NaN;
 
-  const isUpcomingByStatus = st.includes("upcom"); 
+  const isUpcomingByStatus = st.includes("upcom");
   const isLiveByStatus = st === "live";
 
   const determineTarget = () => {
@@ -45,7 +45,7 @@ export default function Countdown({ endDate, status, startDate }: CountdownProps
     // ако има startDate и е преди началото -> upcoming
     if (!Number.isNaN(startTs) && startTs > now) return { mode: "upcoming", target: startTs };
 
-    // status казва upcoming (дори без startDate) -> treat as upcoming (no countdown if no startTs)
+    // status казва upcoming дори без startDate
     if (isUpcomingByStatus && Number.isNaN(startTs)) return { mode: "upcoming", target: NaN };
 
     // ако статус е live И endTs в бъдеще -> live
@@ -88,7 +88,6 @@ export default function Countdown({ endDate, status, startDate }: CountdownProps
     }, 1000);
 
     return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endDate, startDate, status]); // когато някой от тези се промени, ревалидираме
 
   // render logic

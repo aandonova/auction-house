@@ -8,12 +8,15 @@ export default function ItemCard({ item }: { item: AuctionItem }) {
     <Link to={`/item/${item.id}`} className="block">
       <div className="bg-white dark:bg-gray-900 dark:text-gray-100 shadow item-card rounded-lg overflow-hidden hover:shadow-lg transition item-card">
         <img src=
-          {item.imageUrl} 
-          alt={item.title} 
-          className="w-full h-40 object-cover" 
-          onError={(e) => {(e.target as HTMLImageElement).src =
-          "https://picsum.photos/id/760/532/595?random=40";
-        }}/>
+          {item.imageUrl}
+          alt={item.title}
+          className="w-full h-40 object-cover"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src =
+            "https://picsum.photos/id/760/532/595?random=40";
+          }} />
+        <div className='absolute top-5 right-2 z-10'>
+        </div>
         <div className="flex items-center justify-between m-1">
           <p className="text-sm bg-white dark:bg-gray-900 dark:text-gray-100">Estimate: ${item.estimatedValue}</p>
           <Countdown endDate={item.endDate} status={item.status} />

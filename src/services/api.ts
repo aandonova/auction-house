@@ -1,7 +1,13 @@
 import type { AuctionItem } from "../types/item";
 
+const API_BASE =
+  import.meta.env.VITE_API_BASE ??
+  (import.meta.env.DEV
+    ? "/api"
+    : "https://sttrafficplatformassets.blob.core.windows.net");
+
+const REMOTE_URL = `${API_BASE}/traffic-assets/lots.json`;
 const LOCAL_URL = "/lots.json";
-const REMOTE_URL = "https://sttrafficplatformassets.blob.core.windows.net/traffic-assets/lots.json";
 
 export async function fetchLots(): Promise<AuctionItem[]> {
   try {

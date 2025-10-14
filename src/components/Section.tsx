@@ -2,7 +2,7 @@ import type { AuctionItem } from '../types/item';
 import ItemCard from './ItemCard';
 import { Link } from 'react-router-dom';
 
-export default function Section({ title, items, previewCount = 4 } : { title: string; items: AuctionItem[]; previewCount?: number }) {
+export default function Section({ title, items, previewCount = 4 }: { title: string; items: AuctionItem[]; previewCount?: number }) {
   const preview = items.slice(0, previewCount);
   return (
     <section className="mb-8">

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { AuctionItem } from "../types/item";
 import { fetchLots } from "../services/api";
 import Countdown from "../components/Countdown";
+import WatchListButton from "../components/WatchlistButton";
 
 export default function ItemPage() {
   const { id } = useParams<{ id: string }>();
@@ -43,8 +44,8 @@ export default function ItemPage() {
     item.status === "live"
       ? "bg-emerald-100 text-emerald-700"
       : item.status === "upcoming"
-      ? "bg-amber-100 text-amber-700"
-      : "bg-gray-100 text-gray-700";
+        ? "bg-amber-100 text-amber-700"
+        : "bg-gray-100 text-gray-700";
 
   return (
     <div className="container mx-auto p-6 space-y-6 bg-gray-50 dark:bg-gray-950 dark:text-gray-100">
@@ -53,6 +54,7 @@ export default function ItemPage() {
         <h1 className="text-3xl font-bold tracking-tight">{item.title}</h1>
         <span className={`inline-flex items-center px-3 py-1 text-xs rounded-full ${statusChip}`}>
           {item.status}
+          <WatchListButton id={item.id} />
         </span>
       </div>
 
@@ -77,7 +79,7 @@ export default function ItemPage() {
               <div className="text-sm text-gray-500 dark:text-gray-400">Time Left</div>
               <div className="text-lg font-semibold">
                 <Countdown endDate={item.endDate} status={item.status} startDate={item.startDate} />
-              </div>          
+              </div>
             </div>
           </div>
 
@@ -111,7 +113,7 @@ export default function ItemPage() {
           </div>
         </div>
       </div>
-      
+
       <div className="flex justify-between items-center pt-2">
         <Link
           to={`/category/${item.category}`}
