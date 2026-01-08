@@ -11,21 +11,18 @@ export default function WatchlistPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log("[WatchlistPage] useEffect: fetchLots()");
         fetchLots()
             .then((data) => {
                 console.log("[WatchlistPage] lots length =", data.length);
                 setItems(data);
             })
             .finally(() => setLoading(false));
-        console.log("[WatchlistPage] ids from context =", ids);
 
     }, []);
 
     const favoriteItems = useMemo(() => {
         const idSet = new Set(ids.map((x) => Number(x)).filter(Number.isFinite));
         const res = items.filter((i) => idSet.has(Number(i.id)));
-        console.log("[WatchlistPage] ids =", ids, "first10 items ids =", items.slice(0, 10).map(i => i.id), "matched =", res.length);
         return res;
     }, [items, ids]);
 
